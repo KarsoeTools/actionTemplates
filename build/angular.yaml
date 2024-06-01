@@ -1,0 +1,18 @@
+# https://github.com/n3wt0n/ReusableWorkflow/blob/f89362e4c298f42a89be625eee44c5e85bd8166b/.github/workflows/buildAndPublishDockerImage.yml#L3-L4
+# https://github.com/n3wt0n/ActionsTest/blob/fe32f39d831d08c84fec078f6aa912f6fd606568/.github/workflows/reusableWorkflowsUser.yml
+name: BuildAndPushImageOnHarbor
+on:
+  workflow_call:
+    inputs:
+      workflow_id: BuildAndPushImageOnHarbor
+      inputs:
+        REGISTRY: ${{ secrets.REGISTRY }}
+
+jobs:
+  builds:
+    steps:
+    - uses: actions/checkout@v3
+    - name: BuildAndPushImageOnHarbor
+      run: |
+        docker build ./ -t $REGISTRY/chaturmail/chaturmail-backend:${{ github.run_number }}
+        docker push $REGISTRY/chaturmail/chaturmail-backend:${{ github.run_number }}
