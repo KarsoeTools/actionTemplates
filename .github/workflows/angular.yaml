@@ -4,15 +4,25 @@ name: BuildAndPushImageOnHarbor
 on:
   workflow_call:
     inputs:
-      workflow_id: BuildAndPushImageOnHarbor
-      inputs:
-        REGISTRY: ${{ secrets.REGISTRY }}
+      run_number:
+        description: 'The run number of the workflow'
+        required: true
+        type: string
+         
 
 jobs:
-  builds:
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: BuildAndPushImageOnHarbor
       run: |
-        docker build ./ -t $REGISTRY/chaturmail/chaturmail-backend:${{ github.run_number }}
-        docker push $REGISTRY/chaturmail/chaturmail-backend:${{ github.run_number }}
+        docker build ./ -t $REGISTRY/chaturmail/chaturmail-backend:${{ run_number }}
+        docker push $REGISTRY/chaturmail/chaturmail-backend:${{ run_number }}
+  # builds:
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: BuildAndPushImageOnHarbor
+  #     run: |
+  #       docker build ./ -t $REGISTRY/chaturmail/chaturmail-backend:${{ github.run_number }}
+  #       docker push $REGISTRY/chaturmail/chaturmail-backend:${{ github.run_number }}
