@@ -8,6 +8,11 @@ on:
         description: 'The run number of the workflow'
         required: true
         type: string
+      registry:
+        description: 'The registry to push the image to'
+        required: true
+        type: string
+
          
 
 jobs:
@@ -17,8 +22,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: BuildAndPushImageOnHarbor
       run: |
-        docker build ./ -t $REGISTRY/chaturmail/chaturmail-backend:${{ run_number }}
-        docker push $REGISTRY/chaturmail/chaturmail-backend:${{ run_number }}
+        docker build ./ -t $registry/chaturmail/chaturmail-backend:${{ run_number }}
+        docker push $registry/chaturmail/chaturmail-backend:${{ run_number }}
   # builds:
   #   steps:
   #   - uses: actions/checkout@v3
