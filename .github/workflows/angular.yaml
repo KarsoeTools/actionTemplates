@@ -32,6 +32,10 @@ on:
         required: true
       token:
         required: true
+      username_github:
+        required: true
+      email_github:
+        required: true
          
 jobs:
   reusable_workflow_job:
@@ -62,8 +66,8 @@ jobs:
         
     - name: Push to Repo
       run: |
-        git config --global user.name "${{secrets.USERNAME_GITHUB}}"
-        git config --global user.email "${{secrets.EMAIL_GITHUB}}"
+        git config --global user.name "${{secrets.username_github }}"
+        git config --global user.email "${{secrets.email_github }}"
         cd ./picluster
         git add .
         git commit -m "Updated by GitHub Actions"
