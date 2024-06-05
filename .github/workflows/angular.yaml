@@ -51,7 +51,7 @@ jobs:
         # docker push ${{ inputs.registry }}/karsoekube/arm-guids:${{ inputs.run_number }}
     - name: Clone Repository
       run: |
-        git clone https://${{ inputs.TOKEN}}@${{ inputs.REPOSITORY }}
+        git clone https://${{ secrets.TOKEN}}@${{ inputs.REPOSITORY }}
 
     - name: UpdateRefFile
       run: |
