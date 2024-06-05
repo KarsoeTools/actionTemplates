@@ -54,8 +54,8 @@ jobs:
     - name: BuildAndPushImageOnHarbor
       run: |
         pwd
-        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/${{ inputs.IMAGE_NAME }}:${{ inputs.run_number }} --push .
-        # docker push ${{ inputs.registry }}/karsoekube/arm-guids:${{ inputs.run_number }}
+        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/${{ inputs.IMAGE_NAME }}:${{ inputs.PROJECT }}${{ inputs.run_number }} --push .
+        
     - name: Clone Repository
       run: |
         git clone https://${{ secrets.token}}@${{ inputs.REPOSITORY }}
