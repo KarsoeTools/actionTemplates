@@ -17,16 +17,18 @@ on:
         required: true
         type: string
       PROJECT:
-         required: true
-         type: string
+        required: true
+        type: string
       REPOSITORY:
-         required: true
-         type: string
+        required: true
+        type: string
     secrets:
       username:
-         required: true   
+        required: true   
       password:
-         required: true
+        required: true
+      TOKEN:
+        required: true
          
 jobs:
   reusable_workflow_job:
@@ -34,7 +36,7 @@ jobs:
     steps:
     - uses: docker/login-action@v1
       with:
-        registry: $REGISTRY
+        registry: ${{ inputs.registry  }}
         username: ${{ secrets.username  }}
         password: ${{ secrets.password }}
 
@@ -59,4 +61,4 @@ jobs:
         cd ./picluster
         git add .
         git commit -m "Updated by GitHub Actions"
-        git push https://${{ secrets.TOKEN}}@${{ inputs.REPOSITORY }} --all
+        git push https://${{ secrets.TOKEN }}@${{ inputs.REPOSITORY }} --all
