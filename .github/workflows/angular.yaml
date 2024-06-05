@@ -16,8 +16,9 @@ on:
         description: 'The registry to push the image to'
         required: true
         type: string
-         
-
+      PROJECT:
+         required: true
+         type: string
 jobs:
   reusable_workflow_job:
     runs-on: ubuntu-latest
@@ -32,15 +33,15 @@ jobs:
     - name: BuildAndPushImageOnHarbor
       run: |
         pwd
-        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ env.REGISTRY }}/karsoekube/arm-guids:${{ github.run_number }} --push .
-        # docker push ${{ env.REGISTRY }}/karsoekube/arm-guids:${{ github.run_number }}
+        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.REGISTRY }}/karsoekube/arm-guids:${{ inputs.run_number }} --push .
+        # docker push ${{ inputs.REGISTRY }}/karsoekube/arm-guids:${{ inputs.run_number }}
     - name: Clone Repository
       run: |
-        git clone https://${{ secrets.TOKEN}}@${{ env.REPOSITORY }}
+        git clone https://${{ inputs.TOKEN}}@${{ inputs.REPOSITORY }}
 
     - name: UpdateRefFile
       run: |
-        echo "${{ github.run_number }}"> ./picluster/apps/${{ env.PROJECT }}/${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}.imageref.txt
+        echo "${{ inputs.run_number }}"> ./picluster/apps/${{ inputs.PROJECT }}/${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}.imageref.txt
         
     - name: Push to Repo
       run: |
@@ -49,4 +50,4 @@ jobs:
         cd ./picluster
         git add .
         git commit -m "Updated by GitHub Actions"
-        git push https://${{ secrets.TOKEN}}@${{ env.REPOSITORY }} --all
+        git push https://${{ secrets.TOKEN}}@${{ inputs.REPOSITORY }} --all
