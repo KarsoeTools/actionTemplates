@@ -41,6 +41,9 @@ jobs:
         password: ${{ secrets.password }}
 
     - uses: actions/checkout@v3
+    - name: Set up Docker Buildx
+      run: |
+        docker buildx create --use
     - name: BuildAndPushImageOnHarbor
       run: |
         pwd
