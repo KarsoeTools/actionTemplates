@@ -20,10 +20,9 @@ on:
          required: true
          type: string
     secrets:
-      HARBOR_USERNAME:
-         required: true
-         
-      HARBOR_PASSWORD:
+      username:
+         required: true         
+      password:
          required: true
          
 jobs:
@@ -33,8 +32,8 @@ jobs:
     - uses: docker/login-action@v1
       with:
         registry: $REGISTRY
-        username: ${{ secrets.HARBOR_USERNAME  }}
-        password: ${{ secrets.HARBOR_PASSWORD }}
+        username: ${{ secrets.username  }}
+        password: ${{ secrets.password }}
 
     - uses: actions/checkout@v3
     - name: BuildAndPushImageOnHarbor
