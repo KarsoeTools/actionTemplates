@@ -19,11 +19,13 @@ on:
       PROJECT:
          required: true
          type: string
-    secrets:
+    
       username:
-         required: true         
+         required: true   
+         type: string
       password:
          required: true
+         type: string
          
 jobs:
   reusable_workflow_job:
