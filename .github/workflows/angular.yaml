@@ -27,7 +27,7 @@ on:
         required: true   
       password:
         required: true
-      TOKEN:
+      token:
         required: true
          
 jobs:
@@ -51,7 +51,7 @@ jobs:
         # docker push ${{ inputs.registry }}/karsoekube/arm-guids:${{ inputs.run_number }}
     - name: Clone Repository
       run: |
-        git clone https://${{ secrets.TOKEN}}@${{ inputs.REPOSITORY }}
+        git clone https://${{ secrets.token}}@${{ inputs.REPOSITORY }}
 
     - name: UpdateRefFile
       run: |
@@ -64,4 +64,4 @@ jobs:
         cd ./picluster
         git add .
         git commit -m "Updated by GitHub Actions"
-        git push https://${{ secrets.TOKEN }}@${{ inputs.REPOSITORY }} --all
+        git push https://${{ secrets.token }}@${{ inputs.REPOSITORY }} --all
