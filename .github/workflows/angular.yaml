@@ -22,6 +22,9 @@ on:
       REPOSITORY:
         required: true
         type: string
+      branch:
+        required: true
+        type: string
     secrets:
       username:
         required: true   
@@ -55,7 +58,7 @@ jobs:
 
     - name: UpdateRefFile
       run: |
-        echo "${{ inputs.run_number }}"> ./picluster/apps/${{ inputs.PROJECT }}/${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}.imageref.txt
+        echo "${{ inputs.run_number }}"> ./picluster/apps/${{ inputs.PROJECT }}/${{ inputs.branch }}.imageref.txt
         
     - name: Push to Repo
       run: |
