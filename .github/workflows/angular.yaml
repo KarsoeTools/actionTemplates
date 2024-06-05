@@ -19,6 +19,9 @@ on:
       PROJECT:
          required: true
          type: string
+      REPOSITORY:
+         required: true
+         type: string
     secrets:
       username:
          required: true   
@@ -39,8 +42,8 @@ jobs:
     - name: BuildAndPushImageOnHarbor
       run: |
         pwd
-        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.REGISTRY }}/karsoekube/arm-guids:${{ inputs.run_number }} --push .
-        # docker push ${{ inputs.REGISTRY }}/karsoekube/arm-guids:${{ inputs.run_number }}
+        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/karsoekube/arm-guids:${{ inputs.run_number }} --push .
+        # docker push ${{ inputs.registry }}/karsoekube/arm-guids:${{ inputs.run_number }}
     - name: Clone Repository
       run: |
         git clone https://${{ inputs.TOKEN}}@${{ inputs.REPOSITORY }}
