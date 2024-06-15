@@ -54,7 +54,7 @@ jobs:
     - name: BuildAndPushImageOnHarbor
       run: |
         pwd
-        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/${{ inputs.IMAGE_NAME }}:${{ inputs.PROJECT }}${{ inputs.run_number }} --push .
+        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/${{ inputs.IMAGE_NAME }}:${{ inputs.PROJECT }}-${{ inputs.run_number }} --push .
         
     - name: Clone Repository
       run: |
@@ -71,4 +71,4 @@ jobs:
         cd ./picluster
         git add .
         git commit -m "Updated by GitHub Actions"
-        git push https://${{ secrets.token }}@${{ inputs.REPOSITORY }} --all
+        git push https://${{ secrets.token }}@${{ inputs.PROJECT }}-${{ inputs.REPOSITORY }} --all
