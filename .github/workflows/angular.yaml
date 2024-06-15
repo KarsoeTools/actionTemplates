@@ -62,7 +62,7 @@ jobs:
 
     - name: UpdateRefFile
       run: |
-        echo "${{ inputs.run_number }}"> ./picluster/apps/${{ inputs.PROJECT }}/${{ inputs.branch }}.imageref.txt
+        echo "${{ inputs.PROJECT }}-${{ inputs.run_number }}"> ./picluster/apps/${{ inputs.PROJECT }}/${{ inputs.branch }}.imageref.txt
         
     - name: Push to Repo
       run: |
@@ -71,4 +71,4 @@ jobs:
         cd ./picluster
         git add .
         git commit -m "Updated by GitHub Actions"
-        git push https://${{ secrets.token }}@${{ inputs.PROJECT }}-${{ inputs.REPOSITORY }} --all
+        git push https://${{ secrets.token }}@$${{ inputs.REPOSITORY }} --all
