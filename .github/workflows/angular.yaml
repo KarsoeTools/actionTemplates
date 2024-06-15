@@ -54,7 +54,7 @@ jobs:
     - name: BuildAndPushImageOnHarbor
       run: |
         pwd
-        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/${{ inputs.IMAGE_NAME }}:${{ inputs.PROJECT }}-${{ inputs.run_number }} --push .
+        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/${{ inputs.IMAGE_NAME }}:${{ inputs.run_number }} --push .
         
     - name: Clone Repository
       run: |
@@ -62,7 +62,7 @@ jobs:
 
     - name: UpdateRefFile
       run: |
-        echo "${{ inputs.PROJECT }}-${{ inputs.run_number }}"> ./picluster/apps/${{ inputs.PROJECT }}/${{ inputs.branch }}.imageref.txt
+        echo "${{ inputs.run_number }}"> ./picluster/apps/${{ inputs.PROJECT }}/${{ inputs.branch }}.imageref.txt
         
     - name: Push to Repo
       run: |
