@@ -26,6 +26,7 @@ on:
         required: true 
         type: string 
       build_args:
+        type: string
         required: false        
     secrets: 
       username: 
@@ -75,5 +76,6 @@ jobs:
         git add . 
         git commit -m "Updated by GitHub Actions" 
         git push https://${{ secrets.token }}@${{ inputs.REPOSITORY }} --all 
+
 
 
