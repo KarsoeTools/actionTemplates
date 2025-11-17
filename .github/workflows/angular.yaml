@@ -60,7 +60,14 @@ jobs:
     - name: BuildAndPushImageOnHarbor 
       run: | 
         pwd 
-        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/${{ inputs.IMAGE_NAME }}:${{ inputs.run_number }} --push . 
+        BUILD_ARGS=""
+        if [ -n "${{ secrets.user }}" ]; then
+          BUILD_ARGS="$BUILD_ARGS --build-arg USER=${{ secrets.user }}"
+        fi
+        if [ -n "${{ secrets.user_secret }}" ]; then
+          BUILD_ARGS="$BUILD_ARGS --build-arg USER_SECRET=${{ secrets.user_secret }}"
+        fi
+        docker buildx build --file ./dockerfile --platform linux/arm64 --tag ${{ inputs.registry }}/${{ inputs.IMAGE_NAME }}:${{ inputs.run_number }} $BUILD_ARGS --push .
          
     - name: Clone Repository 
       run: | 
