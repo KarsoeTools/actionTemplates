@@ -36,6 +36,8 @@ on:
         required: true 
       email_github: 
         required: true 
+      build_args:
+        required: false
           
 jobs: 
   reusable_workflow_job: 
@@ -72,3 +74,4 @@ jobs:
         git add . 
         git commit -m "Updated by GitHub Actions" 
         git push https://${{ secrets.token }}@${{ inputs.REPOSITORY }} --all 
+
