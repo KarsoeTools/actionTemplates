@@ -25,9 +25,7 @@ on:
       branch: 
         required: true 
         type: string 
-      build_args:
-        type: string
-        required: false        
+        
     secrets: 
       username: 
         required: true    
@@ -39,6 +37,10 @@ on:
         required: true 
       email_github: 
         required: true 
+      user: 
+        required: false
+      user_secret: 
+        required: false
 
           
 jobs: 
@@ -76,6 +78,7 @@ jobs:
         git add . 
         git commit -m "Updated by GitHub Actions" 
         git push https://${{ secrets.token }}@${{ inputs.REPOSITORY }} --all 
+
 
 
 
